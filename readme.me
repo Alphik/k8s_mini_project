@@ -50,3 +50,11 @@ http://<minikube-ip>:30002
 Order Service:
 http://<minikube-ip>:30003
 
+
+
+Clean Up
+kubectl delete -f k8s/namespace.yml
+kubectl delete -f k8s/postgres-deployment.yml
+kubectl delete -f k8s/user-service-deployment.yml
+kubectl delete -f k8s/product-service-deployment.yml
+kubectl delete -f k8s/order-service-deployment.yml
