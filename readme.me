@@ -1,0 +1,52 @@
+project/
+│
+├── user_service/
+│   ├── app.py                # User service logic (login, register)
+│   ├── Dockerfile            # Docker configuration for user-service
+│   └── requirements.txt      # Python dependencies for user-service
+│
+├── product_service/
+│   ├── app.py                # Product service logic (add, delete, view products)
+│   ├── Dockerfile            # Docker configuration for product-service
+│   └── requirements.txt      # Python dependencies for product-service
+│
+├── order_service/
+│   ├── app.py                # Order service logic (create, payment, track orders)
+│   ├── Dockerfile            # Docker configuration for order-service
+│   └── requirements.txt      # Python dependencies for order-service
+│
+├── database/
+│   ├── init.sql              # SQL script to initialize the PostgreSQL database
+│   └── Dockerfile            # Docker configuration for PostgreSQL
+│
+└── k8s/
+    ├── namespace.yml         # Kubernetes namespace configuration
+    ├── postgres-deployment.yml  # Kubernetes deployment for PostgreSQL
+    ├── user-service-deployment.yml  # Kubernetes deployment for user-service
+    ├── product-service-deployment.yml  # Kubernetes deployment for product-service
+    ├── order-service-deployment.yml  # Kubernetes deployment for order-service
+
+Build Docker Images
+docker build -t user-service:latest ./user_service
+docker build -t product-service:latest ./product_service
+docker build -t order-service:latest ./order_service
+docker build -t postgres-db:latest ./database
+
+
+Apply Kubernetes Manifests
+kubectl apply -f k8s/namespace.yml
+kubectl apply -f k8s/postgres-deployment.yml
+kubectl apply -f k8s/user-service-deployment.yml
+kubectl apply -f k8s/product-service-deployment.yml
+kubectl apply -f k8s/order-service-deployment.yml
+
+minikube ip
+User Service:
+http://<minikube-ip>:30001
+
+Product Service:
+http://<minikube-ip>:30002
+
+Order Service:
+http://<minikube-ip>:30003
+
